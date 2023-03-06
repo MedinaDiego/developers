@@ -1,8 +1,9 @@
-<?php 
+<?php
+class LoginController extends ApplicationController
+{
 
-Class login extends ApplicationController{
-
-    public function indexAction(){
-        $this->view->message = "hello from";
+    public function uiloginAction()
+    {
+        //echo "";
     }
 }

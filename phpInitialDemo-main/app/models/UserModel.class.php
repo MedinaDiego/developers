@@ -9,7 +9,7 @@ class UserModel{
     private $objConnection;
 
     public function __construct(){
-        $this->objConnection = new JsonConnection("../../config/usuarios.json");
+        $this->objConnection = new JsonConnection("usuarios.json");
     }
 
     public function validateUser($user, $pass){
