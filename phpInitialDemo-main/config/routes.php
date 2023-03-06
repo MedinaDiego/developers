@@ -13,4 +13,5 @@ $routes = array(
 
 	// '/' => 'test#check',
 	'/' => 'login#uilogin',
+	'test' => 'test#check'
 );
