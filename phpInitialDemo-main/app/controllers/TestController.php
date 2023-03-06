@@ -10,5 +10,6 @@ class TestController extends ApplicationController
 	public function checkAction()
 	{
 		//echo "";
+		//loremipsum
 	}
 }
