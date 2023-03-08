@@ -13,7 +13,9 @@ class UserModel{
     }
 
     public function validateUser($user, $pass){
-        $this->dataUsers = $this->objConnection->getJson();
+        //$this->dataUsers = $this->objConnection->getJson();
+        $saludo = "Hola ".$user." tu contraseña es: ".$pass; 
+        return $saludo;
 
         /***
         Código para validar si existe el usuario, y si es el mismo password.
