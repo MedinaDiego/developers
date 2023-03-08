@@ -10,10 +10,8 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/' => 'login#uilogin',
-	'/test' => 'test#check',
-	'/test.php' => 'test#index',
-	'/main.php' => 'main#uimain'
-	//'/' => 'login#uilogin',
-	//'/' => 'test#check'
+	'/test' => 'test#index',
+	'/main' => 'main#uimain',
+	'/' => 'login#uiLogin',
+	'/verificar' => 'login#enviarDatos'
 );
