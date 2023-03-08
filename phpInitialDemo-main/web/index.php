@@ -1,11 +1,12 @@
 <?php
-
+//var_dump($_SERVER['SCRIPT_NAME']);
 error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', 1);
 date_default_timezone_set('CET');
 
 // defines the web root
 define('WEB_ROOT', substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], '/index.php')));
+//var_dump(WEB_ROOT);
 // defindes the path to the files
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../'));
 // defines the cms path

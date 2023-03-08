@@ -19,7 +19,7 @@ class Router
 			
 			// tries to find a simple route
 			$routeFound = $this->_getSimpleRoute($routes, $controller, $action);
-			
+	
 			if (!$routeFound) {
 				// tries to find the a matching "parameter route"
 				$routeFound = $this->_getParameterRoute($routes, $controller, $action);
@@ -59,9 +59,10 @@ class Router
 	protected function _getUri()
 	{
 		$uri = explode('?',$_SERVER['REQUEST_URI']);
+		//print_r($uri);
 		$uri = $uri[0];
 		$uri = substr($uri, strlen(WEB_ROOT));
-		
+		//echo "\nuri final: ".$uri;
 		return $uri;
 	}
 	
@@ -174,3 +175,4 @@ class Router
 		return new $controller();
 	}
 }
+
