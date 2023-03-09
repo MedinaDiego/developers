@@ -12,6 +12,15 @@
   }
   ```
 -->
+
+<figcaption class="mt-6 flex items-center justify-center space-x-4 text-left">
+  <img src="<?php echo ROOT_PATH_LOCAL.'/images/users/'.$_SESSION["sys_idUsuario"] ?>.jpg" alt="" class="w-14 h-14 rounded-full" loading="lazy" decoding="async">
+  <div>
+    <div class="text-slate-900 font-semibold dark:text-white"><?php echo $_SESSION["sys_nombre"] ?></div>
+    <div class="mt-0.5 text-sm leading-6"><?php echo $_SESSION["sys_mail"] ?></div>
+  </div>
+</figcaption>
+
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:mx-0">

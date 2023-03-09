@@ -1,8 +1,5 @@
 <?php 
-//echo $_SERVER['SERVER_NAME'];
-//echo $_SERVER["DOCUMENT_ROOT"];
-//echo ROOT_PATH;
-//require_once ($_SERVER["DOCUMENT_ROOT"]."/todo/app/models/UserModel.class.php");
+
 require_once (ROOT_PATH."/app/models/UserModel.class.php");
 
 class LoginController extends ApplicationController
@@ -15,14 +12,18 @@ class LoginController extends ApplicationController
     public function enviarDatosAction(){
         $email= $_POST["email"];
         $password = $_POST["password"];
+        
+        $objUser = new UserModel();
+        $usuario = $objUser->validateUser($email,$password);
 
-        $objUserJson = new UserModel();
-        $objUserJson = $objUserJson->validateUser($email,$password);
-
-        echo $objUserJson;
-
-        header("Location: ".WEB_ROOT."/main");
-
+        if($usuario != null){
+            $_SESSION["sys_idUsuario"] = $usuario["idUsuario"];
+            $_SESSION["sys_nombre"] = $usuario["nombre"];
+            $_SESSION["sys_mail"] = $usuario["mail"];
+            header("Location: ".WEB_ROOT."/main");
+        }else{
+            echo "<h2>Las credenciales son incorrectas.";
+        }
 
     }
 

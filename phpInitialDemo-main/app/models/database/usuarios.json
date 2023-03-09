@@ -1,0 +1,22 @@
+{
+    "usuarios": [
+        {
+            "idUsuario": 1,
+            "nombre": "Roberto",
+            "mail": "rccr.2015@gmail.com",
+            "password": "rccr"
+        },
+        {
+            "idUsuario": 2,
+            "nombre": "Angel",
+            "mail": "angel@gmail.com",
+            "password": "abcd1234"
+        },
+        {
+            "idUsuario": 3,
+            "nombre": "Diego",
+            "mail": "diego@gmail.com",
+            "password": "loremIpsum2023"
+        }
+    ]
+}
