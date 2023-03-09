@@ -3,39 +3,39 @@
 $tareas= array("tareas" => array(
     array(
         "idTareas" => 1,
-        "horaInicio" => "",
-        "horaFin"=>"",
+        "fechaInicio" => "",
+        "fechaFin"=>"",
         "nombreTareas" =>"",
         "descripcion" =>"",
         "observaciones" =>"",
-        "usuario"=>""
+        "idUsuario"=>""
     ),
     array(
         "idTareas" => 2,
-        "horaInicio" => "",
-        "horaFin"=>"",
+        "fechaInicio" => "",
+        "fechaFin"=>"",
         "nombreTareas" =>"",
         "descripcion" =>"",
         "observaciones" =>"",
-        "usuario"=>""
+        "isUsuario"=>""
     ),
     array(
         "idTareas" => 3,
-        "horaInicio" => "",
-        "horaFin"=>"",
+        "fechaInicio" => "",
+        "fechaFin"=>"",
         "nombreTareas" =>"",
         "descripcion" =>"",
         "observaciones" =>"",
-        "usuario"=>""
+        "idUsuario"=>""
     ),
     array(
         "idTareas" => 4,
-        "horaInicio" => "",
-        "horaFin"=>"",
+        "fechaInicio" => "",
+        "fechaFin"=>"",
         "nombreTareas" =>"",
         "descripcion" =>"",
         "observaciones" =>"",
-        "usuario"=>""
+        "idUsuario"=>""
     )
 ));
 
