@@ -4,6 +4,10 @@ class MainController extends ApplicationController
 {
     public function uimainAction()
     {
-        //echo "";
+        $ctrlTask = new TaskController();
+        $tasks = $ctrlTask->obtenerTasks();
+        print_r($tasks);
     }  
+
+    
 }
