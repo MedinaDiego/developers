@@ -1,30 +1,38 @@
 <?php
-require_once("JsonConnection.class.php");
+require_once("database/JsonConnection.class.php");
 
 class UserModel{
-    private $user;
-    private $password;
+    private $idUsuario;
+    private $nombre;
     private $mail;
-    private $dataUsers;
-    private $objConnection;
-
+    private $password;
+    
     public function __construct(){
-        $this->objConnection = new JsonConnection("usuarios.json");
+
     }
 
-    public function validateUser($user, $pass){
-        //$this->dataUsers = $this->objConnection->getJson();
-        $saludo = "Hola ".$user." tu contraseña es: ".$pass; 
-        return $saludo;
+    public function createUser($idUsuario, $nombre, $mail, $password){
+        $obj = new UserModel();
+        $obj->idUsuario = $idUsuario;
+        $obj->nombre = $nombre;
+        $obj->mail = $mail;
+        $obj->password = $password;
+        return $obj;
+    }
 
-        /***
-        Código para validar si existe el usuario, y si es el mismo password.
-        Debe retornar true o false.
+
+    public function validateUser($email, $password){
         
-        foreach($this->dataUsers as $user){
-            var_dump($user);
+        $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/usuarios.json');
+        $dataUsers = $objJsonConn->getConnection();
+        foreach($dataUsers as $usuarios){
+            foreach($usuarios as $usuario){
+               if($usuario["mail"] == $email && $usuario["password"]==$password){
+                    //echo $usuario["idUsuario"],$usuario["nombre"],$usuario["mail"],$usuario["password"];
+                    return $usuario;
+               }
+            }
         }
-        ***/
-        
+        return null;
     }
 }
