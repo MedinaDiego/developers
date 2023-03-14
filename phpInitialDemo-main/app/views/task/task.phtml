@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Tarea</title>
-    <!--<style>.Boton{display: block; width:50px;font-family:Arial, Helvetica, sans-serif; font-weight: 700;background-color: blue;borer-radius: 10px;}</style>!-->
 
 </head>
 
@@ -23,8 +22,8 @@
                     <h3>Nombre de la Tarea</h3>
                 </div>
                 <div class="fechas flex space-x-10" style="justify-content: center;">
-                    <div class="mt-1 text-sm text-gray-500">Fecha Inicio:</div>
-                    <div class="mt-1 text-sm text-gray-500">Fecha fin:</div>
+                    <div class="mt-1 text-sm text-gray-700"> Fecha Inicio: <input type="date"></inpiut></div>
+                    <div class="mt-1 text-sm text-gray-700">Fecha fin:  <input type="date"></inpiut></div>
                 </div>
                 
             </div>
@@ -44,17 +43,22 @@
                         <dt class="text-sm font-medium text-gray-500">Estado</dt>
                         <form action="/app/controllers/TaskController.php" method="post" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> Pendiente</form>
                     </div>
+                    <form action="/app/controllers/TaskController.php" method="post">
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500"> <?php $_POST["txtdescripcion"]?>Descripción</dt>
-                        <form action="/app/controllers/TaskController.php" method="post" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis, impedit. Error nesciunt atque at blanditiis aliquid. Err</form>
+                        <input name="Descripción" type="text" class=" border-2 py-1 mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        <label for="company-website" class="block text-sm font-medium leading-6 text-gray-900"></label></input>
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">Observaciones</dt>
-                        <form action="/app/controllers/TaskController.php" method="post" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><?php $_POST["txtobservaciones"]?> Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</form>
+                        <input name="Observaciones" type="text"  class=" border-2 py-5 mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><?php $_POST["txtobservaciones"]?>
+                        <label for="company-website" class="block text-sm font-medium leading-6 text-gray-900"></label></input>
                     </div>
                     <div class="boton flex">
-                        <a class="mx-auto my-5 bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500 transition duration-700 ease-on-out"href="/TaskControlles/nuevoTask">Agregar Tarea</a>
-                    </div>
+                        <button type="submit" class="mx-auto my-5 bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500 transition duration-700 ease-on-out"href="/TaskControlles/nuevoTask">Agregar tarea</button>
+                        
+                      </div>
+                    </form>
                     
                 </dl>
             </div>
