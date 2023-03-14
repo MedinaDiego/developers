@@ -49,22 +49,16 @@ class TaskModel{
         return $arrayTareas;
     }
 
-    public function getNewId(){
+    public function getTask($idTask){
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
         //$objJsonConn = new JsonConnection('database/tareas.json');
         $dataTareas = $objJsonConn->getConnection();
-        $indexMayor = -1;
-        
         foreach($dataTareas as $tareas){
-            if($tareas["idTarea"] > $indexMayor){
-                $indexMayor = $tareas["idTarea"];
-            }
+            if($tareas["idTarea"] == $idTask){
+                return $tareas;  
+            }  
         }
-        if($indexMayor==-1){
-            return 1;
-        }else{
-            return $indexMayor+1;
-        }
+        return null;
     }
 
     public function addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario){
@@ -103,7 +97,8 @@ class TaskModel{
             "estado" => $estado
         ];
         $json = json_encode(array_values($data), JSON_PRETTY_PRINT);
-        $update = file_put_contents('database/tareas.json', $json);
+        $update = file_put_contents(ROOT_PATH . '/app/models/database/tareas.json', $json);
+        //$update = file_put_contents('database/tareas.json', $json);
         if ($update) {
             $resp['msj'] = 'success';
         } else {
@@ -122,7 +117,8 @@ class TaskModel{
             if (isset($data[$id])) {
                 unset($data[$id]);
                 $json = json_encode(array_values($data), JSON_PRETTY_PRINT);
-                $update = file_put_contents('database/tareas.json', $json);
+                $update = file_put_contents(ROOT_PATH . '/app/models/database/tareas.json', $json);
+                //$update = file_put_contents('database/tareas.json', $json);
                 if ($update) {
                     $resp['msj'] = 'success';
                 } else {
@@ -135,4 +131,21 @@ class TaskModel{
         return $resp;
     }
 
+    public function getNewId(){
+        $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
+        //$objJsonConn = new JsonConnection('database/tareas.json');
+        $dataTareas = $objJsonConn->getConnection();
+        $indexMayor = -1;
+        
+        foreach($dataTareas as $tareas){
+            if($tareas["idTarea"] > $indexMayor){
+                $indexMayor = $tareas["idTarea"];
+            }
+        }
+        if($indexMayor==-1){
+            return 1;
+        }else{
+            return $indexMayor+1;
+        }
+    }
 }

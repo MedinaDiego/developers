@@ -14,6 +14,12 @@ class TaskController extends ApplicationController
         return $tareas;
     }
 
+    public function obtenerTask(){
+        $objTask = new TaskModel();
+        $tarea = $objTask->getTask($_POST["txtIdTarea"]);
+        return $tarea;
+    }
+
     public function nuevoTask(){
         $inicio         = $_POST["txtinicio"];
         $fin            = $_POST["txtfin"];
@@ -22,7 +28,14 @@ class TaskController extends ApplicationController
         $observaciones  = $_POST["txtobservaciones"];
         
         $objTask = new TaskModel();
-        $objTask->addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario);
+        $resp = $objTask->addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario);
+        
+        if($resp["msj"]=="success"){
+            echo "<script>Se grabó correctamente :)</script>";
+        }else{
+            echo "<script>No se ha podido grabar :(</script>";
+        }
+        header("Location: ".WEB_ROOT."/main");
     }
 
     public function editarTask(){
@@ -35,12 +48,25 @@ class TaskController extends ApplicationController
         $estado         = $_POST["txtestado"];
         
         $objTask = new TaskModel();
-        $objTask->editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado);
+        $resp =  $objTask->editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado);
+        if($resp["msj"]=="success"){
+            echo "<script>Se grabó correctamente :)</script>";
+        }else{
+            echo "<script>No se ha podido actualizar :(</script>";
+        }
+        header("Location: ".WEB_ROOT."/main");
     }
     
     public function deleteTask(){
         $objTask = new TaskModel();
-        $objTask->deleteTask($_POST["txtIdTarea"]);
+        $resp = $objTask->deleteTask($_POST["txtIdTarea"]);
+
+        if($resp["msj"]=="success"){
+            echo "<script>Se grabó correctamente :)</script>";
+        }else{
+            echo "<script>No se ha podido eliminar :(</script>";
+        }
+        header("Location: ".WEB_ROOT."/main");
     }
 
 }
