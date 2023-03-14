@@ -13,5 +13,6 @@ $routes = array(
 	'/test' => 'test#index',
 	'/main' => 'main#uimain',
 	'/' => 'login#uiLogin',
-	'/verificar' => 'login#enviarDatos'
+	'/verificar' => 'login#enviarDatos',
+	
 );
