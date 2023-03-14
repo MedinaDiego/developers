@@ -21,6 +21,7 @@ class TaskController extends ApplicationController
 
     }
     public function deleteTask(){
+        echo "";
 
     }
 
