@@ -1,0 +1,71 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Tarea</title>
+
+</head>
+
+<body>
+
+    <div class="contenedor mx-80 my-10 border-2 border-grey">
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6">
+            <div class="Boton_volverAtras">
+                    <a class="volverAtras bg-sky-200 hover:bg-sky-500 px-2 py-1.5 align-item:center rounded-lg transition duration-700 ease-on-out" href="http://localhost/developers/phpInitialDemo-main/app/views/scripts/main/uimain.phtml">volver atrás</a>
+                </div>
+                <div class=" nombre_tarea font-semibold leading-6 text-gray-900 mx-auto" style="text-align: center;">
+                    <h3>Nombre de la Tarea</h3>
+                </div>
+                <div class="fechas flex space-x-10" style="justify-content: center;">
+                    <div class="mt-1 text-sm text-gray-700"> Fecha Inicio: <input type="date"></inpiut></div>
+                    <div class="mt-1 text-sm text-gray-700">Fecha fin:  <input type="date"></inpiut></div>
+                </div>
+                
+            </div>
+            <div class="border-t border-gray-200">
+                <dl>
+                    <div class="info_user flex space-x-6">
+                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">Creada por</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><?php echo $_SESSION["sys_nombre"] ?></dd>
+                        </div>
+                        <div class="bg-white py-5 sm:grid sm:grid-cols-3 sm:gap-6 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500 mx-10 px-8">Email</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><?php echo $_SESSION["sys_mail"] ?> </dd>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Estado</dt>
+                        <form action="/app/controllers/TaskController.php" method="post" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> Pendiente</form>
+                    </div>
+                    <form action="/app/controllers/TaskController.php" method="post">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500"> <?php $_POST["txtdescripcion"]?>Descripción</dt>
+                        
+                        <input name="Descripción" type="text" class=" border-2 py-1 mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        <label for="company-website" class="block text-sm font-medium leading-6 text-gray-900"></label></input>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Observaciones</dt>
+                        <input name="Observaciones" type="text"  class=" border-2 py-5 mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><?php $_POST["txtobservaciones"]?>
+                        <label for="company-website" class="block text-sm font-medium leading-6 text-gray-900"></label></input>
+                    </div>
+                    <div class="boton flex">
+                        <button type="submit" class="mx-auto my-5 bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500 transition duration-700 ease-on-out"href="/TaskControlles/nuevoTask">Agregar tarea</button>
+                        
+                      </div>
+                    </form>
+                    
+                </dl>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
