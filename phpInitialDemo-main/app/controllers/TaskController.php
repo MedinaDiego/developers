@@ -3,42 +3,69 @@ require_once (ROOT_PATH."/app/models/TaskModel.class.php");
 
 class TaskController extends ApplicationController
 {
-    public function uitaskAction()
+    public function iutaskAction(){
+        $this->headerAction();
+        $this->showTaskAction();
+    }
+
+    public function showTaskAction()
     {
-        //echo "";
-    }  
+        $this->view->__set('data',$this->obtenerTasks());
+       
+    }
 
     public function obtenerTasks(){
+       
         $objTask = new TaskModel();
         $tareas = $objTask->getTasksByUser($_SESSION["sys_idUsuario"]);
         return $tareas;
     }
 
-    public function obtenerTask(){
-        $objTask = new TaskModel();
-        $tarea = $objTask->getTask($_POST["txtIdTarea"]);
-        return $tarea;
+    public function uinewtaskAction()
+    {
+        $this->headerAction();
     }
 
-    public function nuevoTask(){
-        $inicio         = $_POST["txtinicio"];
-        $fin            = $_POST["txtfin"];
-        $nombre         = $_POST["txtnombre"];
-        $descripcion    = $_POST["txtdescripcion"];
-        $observaciones  = $_POST["txtobservaciones"];
-        
+    public function nuevoTaskAction()
+    {
+        $this->view->disableView();
+        $request = $this->getRequest();
+
+        $inicio         = $request->getParam("txtinicio", $default = null);
+        $fin            = $request->getParam("txtfin", $default = null);
+        $nombre         = $request->getParam("txtnombre", $default = null);
+        $descripcion    = $request->getParam("txtdescripcion", $default = null);
+        $observaciones  = $request->getParam("txtobservaciones", $default = null);
+        $usuario        = $_SESSION["sys_idUsuario"];
+
         $objTask = new TaskModel();
         $resp = $objTask->addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario);
-        
+       
         if($resp["msj"]=="success"){
-            echo "<script>Se grabó correctamente :)</script>";
+            echo '<script>alert("Se grabó correctamente :)")</script>';
+            header("Location: ".WEB_ROOT."/main");
         }else{
-            echo "<script>No se ha podido grabar :(</script>";
+            echo '<script>alert("No se ha podido grabar :(")</script>';
         }
-        header("Location: ".WEB_ROOT."/main");
     }
 
-    public function editarTask(){
+    public function uiedittaskAction()
+    {
+        $request = $this->getRequest();
+        $this->headerAction();
+        $objTask = new TaskModel();
+        $this->view->__set('data',$objTask->getTask($request->getParam("txtIdTarea", $default = null)));
+
+    }
+
+    public function editarTaskAction(){
+
+        $this->view->disableView();
+        //$request = $this->getRequest();
+        //$parametros = $request->getAllParams();
+        //var_dump($parametros);
+        //exit;
+
         $idTarea        = $_POST["txtIdTarea"];
         $inicio         = $_POST["txtinicio"];
         $fin            = $_POST["txtfin"];
@@ -46,9 +73,12 @@ class TaskController extends ApplicationController
         $descripcion    = $_POST["txtdescripcion"];
         $observaciones  = $_POST["txtobservaciones"];
         $estado         = $_POST["txtestado"];
-        
+        $usuario        = $_SESSION["sys_idUsuario"];
+
+    
+
         $objTask = new TaskModel();
-        $resp =  $objTask->editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado);
+        $resp =  $objTask->editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado,$usuario);
         if($resp["msj"]=="success"){
             echo "<script>Se grabó correctamente :)</script>";
         }else{
@@ -57,16 +87,18 @@ class TaskController extends ApplicationController
         header("Location: ".WEB_ROOT."/main");
     }
     
-    public function deleteTask(){
+    public function deleteTaskAction(){
+
         $objTask = new TaskModel();
-        $resp = $objTask->deleteTask($_POST["txtIdTarea"]);
+        $resp = $objTask->deleteTask($_REQUEST["txtIdTarea"]);
 
         if($resp["msj"]=="success"){
-            echo "<script>Se grabó correctamente :)</script>";
+            //echo "<script>Se grabó correctamente :)</script>";
+            header("Location: ".WEB_ROOT."/main");
         }else{
-            echo "<script>No se ha podido eliminar :(</script>";
+            echo '<script> alert("No se ha podido eliminar :(")</script>';
         }
-        header("Location: ".WEB_ROOT."/main");
+        
     }
 
 }
