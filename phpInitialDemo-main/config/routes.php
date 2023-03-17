@@ -10,8 +10,14 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/test' => 'test#index',
-	'/main' => 'main#uimain',
-	'/' => 'login#uiLogin',
-	'/verificar' => 'login#enviarDatos'
+	'/'				=>	'login#index',
+	'/validar'		=>	'login#validar',
+	'/main' 		=>	'task#iutask',
+	'/cerrar'   	=>  'login#cerrar',
+	'/frmnewtask'	=>	'task#uinewtask',
+	'/newtask' 		=> 	'task#nuevoTask',
+	'/frmedittask'	=> 	'task#uiedittask',
+	'/updatetask' 	=> 	'task#editarTask',
+	'/deletetask' 	=> 	'task#deletetask'
+	//'/test' 		=> 	'test#index'
 );
