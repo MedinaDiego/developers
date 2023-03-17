@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION["sys_idUsuario"])) {
+  header("Location: " . WEB_ROOT . "/");
+}
 $tarea = $this->data;
 
 ?>
