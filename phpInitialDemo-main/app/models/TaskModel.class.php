@@ -39,12 +39,15 @@ class TaskModel{
         //$objJsonConn = new JsonConnection('database/tareas.json');
         $dataTareas = $objJsonConn->getConnection();
         $arrayTareas = array();
+        //print_r($dataTareas);
         foreach($dataTareas as $tareas){
-            foreach($tareas as $tarea){
-                if($tarea["usuario"] == $usuario){
-                    array_push($arrayTareas,$tarea);  
+            
+            //foreach($tareas as $tarea){ //deshabilito el foreach y desaparecen los warnings.
+                //var_dump($tarea);
+                if($tareas["usuario"] == $usuario){
+                    array_push($arrayTareas,$tareas);  
                 }
-            } 
+            //} 
         }
         return $arrayTareas;
     }
@@ -71,10 +74,11 @@ class TaskModel{
             "nombre" => $nombre,
             "descripcion" => $descripcion,
             "observaciones" => $observaciones,
-            "estado" => "PENDIENTE",
+            "estado" => "Pendiente",
             "usuario" => $usuario
         ];
         $json = json_encode(array_values($data), JSON_PRETTY_PRINT);
+
         $insert = file_put_contents(ROOT_PATH . '/app/models/database/tareas.json', $json);
         //$insert = file_put_contents('database/tareas.json', $json);
         if ($insert) {
@@ -85,40 +89,56 @@ class TaskModel{
         return $resp;
     }
 
-    public function editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado){ 
-        $data = $this->getAllTasks();
-        $data[$idTarea-1] = (object) [
+    public function editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado, $usuario){ 
+        $dataTareas = $this->getAllTasks();
+        $indexUpdate = 0;
+            $i=0;
+            foreach($dataTareas as $tareas){
+                if($tareas["idTarea"] == $idTarea){
+                    $indexUpdate = $i;
+                }
+                $i++;
+            }
+            $dataTareas[$indexUpdate] = (object) [
             "idTarea" => $idTarea,
             "inicio" => $inicio,
             "fin" => $fin,
             "nombre" => $nombre,
             "descripcion" => $descripcion,
             "observaciones" => $observaciones,
-            "estado" => $estado
+            "estado" => $estado,
+            "usuario" => $usuario
         ];
-        $json = json_encode(array_values($data), JSON_PRETTY_PRINT);
+        $json = json_encode(array_values($dataTareas), JSON_PRETTY_PRINT);
         $update = file_put_contents(ROOT_PATH . '/app/models/database/tareas.json', $json);
-        //$update = file_put_contents('database/tareas.json', $json);
+
         if ($update) {
             $resp['msj'] = 'success';
         } else {
             $resp['msj'] = 'failed';
         }
-        return $resp;       
+        return $resp;
     }
 
-    public function deleteTask($id = ''){   
+    public function deleteTask($id = ''){
         if (empty($id)) {
             $resp['msj'] = 'failed';
             $resp['msj'] = 'El ID de miembro dado está vacío.';
         } else {
-            $id = $id-1;
-            $data = $this->getAllTasks();
-            if (isset($data[$id])) {
-                unset($data[$id]);
-                $json = json_encode(array_values($data), JSON_PRETTY_PRINT);
+            $dataTareas = $this->getAllTasks();
+            $indexDelete = 0;
+            $i=0;
+            foreach($dataTareas as $tareas){
+                if($tareas["idTarea"] == $id){
+                    $indexDelete = $i;
+                }
+                $i++;
+            }
+            if (isset($dataTareas[$indexDelete])) {
+                unset($dataTareas[$indexDelete]);
+                $json = json_encode(array_values($dataTareas), JSON_PRETTY_PRINT);
                 $update = file_put_contents(ROOT_PATH . '/app/models/database/tareas.json', $json);
-                //$update = file_put_contents('database/tareas.json', $json);
+
                 if ($update) {
                     $resp['msj'] = 'success';
                 } else {
@@ -130,6 +150,8 @@ class TaskModel{
         }
         return $resp;
     }
+
+    
 
     public function getNewId(){
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
