@@ -1,29 +1,40 @@
 <?php
-require_once("Connection.class.php");
+//require_once("Connection.class.php");
+require_once(ROOT_PATH ."/lib/base/Model.php");
 
-class MySqlConnection extends Connection{
+//todo_app
+//medina29
+//00q&mO67o
+class MySqlConnection extends Model{
 
-    private $host;
+    //private $host;
     private $port;
-    private $user;
-    private $password;
+    
+    //private $password;
     private $database;
+    private $servername;
+    private $username;
+    private $password;
 
     public function __construct(){
-        $this->host = "localhost";
+        $this->servername = "localhost";
         $this->port = "3306";
-        $this->user = "rccr";
-        $this->password = "rccr";
-        $this->database = "optica";
+        $this->username = "medina29";
+        $this->password = "00q&mO67o";
+        $this->database = "todo_app";
     }
 
-    public function getConnection(){
+    public function getConnection($sql){
         try {
-            $conn = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->database", $this->user,$this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-        } catch (PDOException $e) {
-            echo 'Falló la conexión: ' . $e->getMessage();
+        $conn = new PDO("mysql:host=".$this->servername.";dbname=".$this->database."", $this->username, $this->password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       
+        $conn->exec($sql);
+        echo "Connected successfully";
+        } catch(PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        echo "Connection failed: " . $e->getMessage();
         }
 
     }

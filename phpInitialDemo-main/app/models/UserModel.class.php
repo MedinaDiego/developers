@@ -39,10 +39,15 @@ class UserModel{
     
     //SQL CONECTION 
     public function addUser($nombre, $email, $password, $perfil){
+        $conexion = new MySqlConnection();
+        $sql = "INSERT INTO usuarios_todo (id_usuario,nombre, email, password, perfil)VALUES(NULL,'$nombre','$email', '$password', '$perfil')";
+        $conn = $conexion->getConnection($sql);
+        echo $conn;
+        
 
-        $existeUser = new MySqlConnection();
+        
 
-        $data = $existeUser->getConnection();
+        
 
         //echo "<script>alert('".$nombre."-".$email."-".$password."-".$perfil."')</script>";
 
