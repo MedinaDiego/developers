@@ -30,8 +30,9 @@ class MySqlConnection extends Model{
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        
-        $conn->exec($sql);
-        echo "Connected successfully";
+        $result = $conn->exec($sql);
+        //echo "Connected successfully";
+        return $result;
         } catch(PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         echo "Connection failed: " . $e->getMessage();
