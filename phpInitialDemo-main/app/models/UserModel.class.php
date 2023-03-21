@@ -1,5 +1,6 @@
 <?php
 require_once("database/JsonConnection.class.php");
+require_once("database/MySqlConnection.class.php");
 
 class UserModel{
     private $idUsuario;
@@ -34,5 +35,16 @@ class UserModel{
             }
         }
         return null;
+    }
+    
+    //SQL CONECTION 
+    public function addUser($nombre, $email, $password, $perfil){
+
+        $existeUser = new MySqlConnection();
+
+        $data = $existeUser->getConnection();
+
+        //echo "<script>alert('".$nombre."-".$email."-".$password."-".$perfil."')</script>";
+
     }
 }

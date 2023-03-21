@@ -12,7 +12,8 @@
 $routes = array(
 	'/'				=>	'login#index',
 	'/validar'		=>	'login#validar',
-	'/registrar'     =>  'login#registro',
+	'/registrar'    =>  'login#registro',
+	'/altausuario'  =>  'login#altausuario',
 	'/main' 		=>	'task#iutask',
 	'/cerrar'   	=>  'login#cerrar',
 	'/frmnewtask'	=>	'task#uinewtask',
