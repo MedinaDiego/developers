@@ -1,7 +1,8 @@
 <?php
 require_once("database/JsonConnection.class.php");
 
-class TaskModel{
+class TaskModel
+{
     private $idTarea;
     private $inicio;
     private $fin;
@@ -10,12 +11,13 @@ class TaskModel{
     private $observaciones;
     private $estado;
     private $usuario;
-    
-    public function __construct(){
 
+    public function __construct()
+    {
     }
 
-    public function createTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario){
+    public function createTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario)
+    {
         $obj = new TaskModel();
         $obj->idTarea = 10; //crear metodo que devolvera un nuevo ID (correlativo).
         $obj->inicio = $inicio;
@@ -27,44 +29,47 @@ class TaskModel{
         return $obj;
     }
 
-    public function getAllTasks(){
+    public function getAllTasks()
+    {
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
         //$objJsonConn = new JsonConnection('database/tareas.json');
         return $objJsonConn->getConnection();
-        
     }
 
-    public function getTasksByUser($usuario){
+    public function getTasksByUser($usuario)
+    {
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
         //$objJsonConn = new JsonConnection('database/tareas.json');
         $dataTareas = $objJsonConn->getConnection();
         $arrayTareas = array();
         //print_r($dataTareas);
-        foreach($dataTareas as $tareas){
-            
+        foreach ($dataTareas as $tareas) {
+
             //foreach($tareas as $tarea){ //deshabilito el foreach y desaparecen los warnings.
-                //var_dump($tarea);
-                if($tareas["usuario"] == $usuario){
-                    array_push($arrayTareas,$tareas);  
-                }
+            //var_dump($tarea);
+            if ($tareas["usuario"] == $usuario) {
+                array_push($arrayTareas, $tareas);
+            }
             //} 
         }
         return $arrayTareas;
     }
 
-    public function getTask($idTask){
+    public function getTask($idTask)
+    {
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
         //$objJsonConn = new JsonConnection('database/tareas.json');
         $dataTareas = $objJsonConn->getConnection();
-        foreach($dataTareas as $tareas){
-            if($tareas["idTarea"] == $idTask){
-                return $tareas;  
-            }  
+        foreach ($dataTareas as $tareas) {
+            if ($tareas["idTarea"] == $idTask) {
+                return $tareas;
+            }
         }
         return null;
     }
 
-    public function addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario){
+    public function addTask($inicio, $fin, $nombre, $descripcion, $observaciones, $usuario)
+    {
         $idTask = $this->getNewId();
         $data = $this->getAllTasks();
         $data[$idTask] = (object) [
@@ -89,17 +94,18 @@ class TaskModel{
         return $resp;
     }
 
-    public function editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado, $usuario){ 
+    public function editTask($idTarea, $inicio, $fin, $nombre, $descripcion, $observaciones, $estado, $usuario)
+    {
         $dataTareas = $this->getAllTasks();
         $indexUpdate = 0;
-            $i=0;
-            foreach($dataTareas as $tareas){
-                if($tareas["idTarea"] == $idTarea){
-                    $indexUpdate = $i;
-                }
-                $i++;
+        $i = 0;
+        foreach ($dataTareas as $tareas) {
+            if ($tareas["idTarea"] == $idTarea) {
+                $indexUpdate = $i;
             }
-            $dataTareas[$indexUpdate] = (object) [
+            $i++;
+        }
+        $dataTareas[$indexUpdate] = (object) [
             "idTarea" => $idTarea,
             "inicio" => $inicio,
             "fin" => $fin,
@@ -120,16 +126,17 @@ class TaskModel{
         return $resp;
     }
 
-    public function deleteTask($id = ''){
+    public function deleteTask($id = '')
+    {
         if (empty($id)) {
             $resp['msj'] = 'failed';
             $resp['msj'] = 'El ID de miembro dado está vacío.';
         } else {
             $dataTareas = $this->getAllTasks();
             $indexDelete = 0;
-            $i=0;
-            foreach($dataTareas as $tareas){
-                if($tareas["idTarea"] == $id){
+            $i = 0;
+            foreach ($dataTareas as $tareas) {
+                if ($tareas["idTarea"] == $id) {
                     $indexDelete = $i;
                 }
                 $i++;
@@ -151,23 +158,24 @@ class TaskModel{
         return $resp;
     }
 
-    
 
-    public function getNewId(){
+
+    public function getNewId()
+    {
         $objJsonConn = new JsonConnection(ROOT_PATH . '/app/models/database/tareas.json');
         //$objJsonConn = new JsonConnection('database/tareas.json');
         $dataTareas = $objJsonConn->getConnection();
         $indexMayor = -1;
-        
-        foreach($dataTareas as $tareas){
-            if($tareas["idTarea"] > $indexMayor){
+
+        foreach ($dataTareas as $tareas) {
+            if ($tareas["idTarea"] > $indexMayor) {
                 $indexMayor = $tareas["idTarea"];
             }
         }
-        if($indexMayor==-1){
+        if ($indexMayor == -1) {
             return 1;
-        }else{
-            return $indexMayor+1;
+        } else {
+            return $indexMayor + 1;
         }
     }
 }
