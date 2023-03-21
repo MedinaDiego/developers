@@ -50,7 +50,7 @@ class LoginController extends ApplicationController
         echo "hello from test::check";
     }
 
-    public function registro(){
+    public function registroAction(){
         $this->headerAction();
     }
 }
